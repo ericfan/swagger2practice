@@ -1,2 +1,5 @@
+.gradle
+build
 .idea
+gradle
 swagger2practice.iml
