@@ -1,0 +1,21 @@
+apply plugin: 'java'
+apply plugin: 'io.github.swagger2markup'
+apply plugin: 'org.asciidoctor.convert'
+
+group 'github.ericfan'
+sourceCompatibility = 1.8
+
+configurations {
+    swaggerCodeGen
+}
+
+dependencies {
+    swaggerCodeGen (group: 'io.swagger', name: 'swagger-codegen-cli', version: '2.2.3')
+
+    compile("org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE"){
+        exclude(group : 'org.springframework.boot', module : 'spring-boot-starter-logging')
+        exclude(group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat')
+    }
+    compile 'io.springfox:springfox-swagger2:2.6.1'
+    compile 'org.codehaus.groovy:groovy-all:2.4.13'
+}
