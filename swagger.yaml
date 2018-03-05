@@ -1,0 +1,13 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Eric Fan API
+  description: Demo for showing how to use swagger 2.0
+  contact:
+    name: EricFan
+    email: fanlei77@hotmail.com
+    url: http://github.com/ericfan
+host: localhost:8080
+basePath: /sample
+schemes:
+  - "http"
