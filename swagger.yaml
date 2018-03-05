@@ -11,3 +11,70 @@ host: localhost:8080
 basePath: /sample
 schemes:
   - "http"
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: sample1
+    description: test
+paths:
+  /sample/test1:
+    get:
+      description: test
+      tags:
+        - sample1
+      operationId: getSample
+      parameters:
+        - $ref: '#/parameters/localeHeader'
+      responses:
+        '200':
+          description: success.
+          schema:
+            $ref: '#/definitions/myGod'
+        '400':
+          $ref: '#/responses/invalidRequest'
+        '500':
+          $ref: '#/responses/unexpectedError'
+parameters:
+  localeHeader:
+    name: Accept-Language
+    in: header
+    description: "Requested locale string. See section 14.4:
+                  https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html"
+    required: true
+    type: string
+responses:
+  unexpectedError:
+    description: An unexpected error occurred
+    schema:
+      $ref: '#/definitions/errorModel'
+  invalidRequest:
+    description: The request was invalid
+    schema:
+      $ref: '#/definitions/errorModel'
+definitions:
+  errorModel:
+    type: object
+    properties:
+      apiErrors:
+        type: array
+        description: list of one or more errors that have occured
+        items:
+          $ref: "#/definitions/apiError"
+  apiError:
+    type: object
+    required:
+      - errorCode
+      - userMessage
+      - devMessage
+    properties:
+      errorCode:
+        type: string
+        description: error code
+      message:
+        type: string
+        description: error message
+      field:
+        type: string
+        description: The field which was at fault for the error
